@@ -1,0 +1,123 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="repo"
+            type="com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo" />
+
+        <import type="com.romariomkk.gitrepo.util.Utils" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/base_margin"
+        android:background="@android:color/white"
+        android:elevation="@dimen/card_view_elevation"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="@dimen/card_view_corner_radius"
+        app:cardElevation="@dimen/card_view_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/base_margin">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/item_profile_img"
+                android:layout_width="@dimen/item_feed_profile_size"
+                android:layout_height="@dimen/item_feed_profile_size"
+                android:transitionName="@string/transition_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:repoUrl="@{repo.ownerAvatarUrl}" />
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base_margin"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{repo.fullName}"
+                android:textColor="@color/item_color_title"
+                android:textStyle="bold"
+                android:transitionName="@string/transition_title"
+                app:layout_constraintBottom_toTopOf="@id/item_time"
+                app:layout_constraintStart_toEndOf="@id/item_profile_img"
+                app:layout_constraintTop_toTopOf="@id/item_profile_img"
+                tools:text="Anita murthy has got to sdsdk" />
+
+
+            <TextView
+                android:id="@+id/item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/margin_xsmall"
+                android:text="@{Utils.INSTANCE.getDate(repo.updatedAt)}"
+                android:textColor="@color/item_color_time"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toBottomOf="@id/item_profile_img"
+                app:layout_constraintStart_toStartOf="@id/item_title"
+                app:layout_constraintTop_toBottomOf="@id/item_title"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="3 min" />
+
+
+            <TextView
+                android:id="@+id/item_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base_margin"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@{repo.description}"
+                android:textColor="@color/item_color_desc"
+                android:visibility="@{repo.description == null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_profile_img" />
+
+
+            <TextView
+                android:id="@+id/item_img_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_dot"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="@{repo.language}"
+                app:languageTint="@{repo.language}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_desc"
+                tools:text="Kotlin" />
+
+            <TextView
+                android:id="@+id/item_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_vision"
+                android:drawablePadding="@dimen/dp_8"
+                android:gravity="center_vertical"
+                android:text="@{Integer.toString(repo.watchersCount)}"
+                android:textColor="@color/item_color_like"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/item_img_language"
+                tools:text="396" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

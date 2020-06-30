@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Square Github</string>
+    <string name="title_test_task">R.Leizerovych\'s\nshowcase</string>
+    <string name="title_forks">Forks</string>
+    <string name="title_watchers">Watchers</string>
+    <string name="title_stars">Stars</string>
+    <string name="transition_title" translatable="false">title %s</string>
+    <string name="transition_image" translatable="false">image %s</string>
+    <string name="transition_card" translatable="false">card %s</string>
+    <string name="transition_lang" translatable="false">lang %s</string>
+</resources>

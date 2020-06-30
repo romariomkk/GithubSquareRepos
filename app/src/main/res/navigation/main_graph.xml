@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/reposListing">
+
+    <fragment
+        android:id="@+id/reposListing"
+        android:name="com.romariomkk.gitrepo.view.repos.listing.ReposListingFragment"
+        android:label="ReposListing"
+        tools:layout="@layout/fragment_repos_listing">
+
+        <action
+            android:id="@+id/toRepoDetail"
+            app:destination="@+id/repoDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/repoDetail"
+        android:name="com.romariomkk.gitrepo.view.repos.detail.RepoDetailFragment"
+        android:label="RepoDetail"
+        tools:layout="@layout/fragment_repo_detail">
+
+        <argument
+            android:name="repo"
+            app:argType="com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo" />
+    </fragment>
+
+</navigation>

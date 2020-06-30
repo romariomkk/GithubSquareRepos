@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.romariomkk.gitrepo"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "GITHUB_API_URL", '"https://api.github.com/"'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //design
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constrLayout"
+    implementation "androidx.recyclerview:recyclerview:$supportVer"
+    implementation "com.google.android.material:material:$supportVer"
+    //core
+    implementation "androidx.core:core-ktx:$ktx"
+    implementation "androidx.fragment:fragment-ktx:$fragmentKtx"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVer"
+    //debugging
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho"
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glideVer"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    kapt "com.github.bumptech.glide:compiler:$glideVer"
+    //room
+    implementation "androidx.room:room-runtime:$roomVer"
+    implementation "androidx.room:room-rxjava2:$roomVer"
+    kapt "androidx.room:room-compiler:$roomVer"
+    //rx
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlinVer"
+    //retrofit
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVer"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVer"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVer"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVer"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
+    //tests
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVer"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVer"
+    //hilt
+    implementation "com.google.dagger:hilt-android:$hiltVer"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVer"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltKtxVer"
+    kapt "androidx.hilt:hilt-compiler:$hiltKtxVer"
+    kaptAndroidTest "androidx.hilt:hilt-compiler:$hiltKtxVer"
+    //ui
+    implementation "de.hdodenhof:circleimageview:$circleIv"
+    //logs
+    implementation "com.jakewharton.timber:timber:$timberVer"
+}

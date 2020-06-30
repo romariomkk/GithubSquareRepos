@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="repo"
+            type="com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo" />
+
+        <import type="com.romariomkk.gitrepo.util.Utils" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/base_margin"
+            android:background="@android:color/white"
+            android:elevation="@dimen/card_view_elevation"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="@dimen/card_view_corner_radius"
+            app:cardElevation="@dimen/card_view_elevation"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".view.repos.detail.RepoDetailFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/item_profile_img"
+                    android:layout_width="@dimen/size_image"
+                    android:layout_height="@dimen/size_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.45"
+                    app:repoUrl="@{repo.ownerAvatarUrl}" />
+
+                <TextView
+                    android:id="@+id/item_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base_margin"
+                    android:layout_marginTop="@dimen/base_margin"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{repo.fullName}"
+                    android:textColor="@color/item_color_title"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item_profile_img"
+                    tools:text="Anita murthy has got to sdsdk" />
+
+                <TextView
+                    android:id="@+id/item_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:drawableStart="@drawable/ic_dot"
+                    android:drawablePadding="@dimen/margin_medium"
+                    android:gravity="center_vertical"
+                    android:text="@{repo.language}"
+                    app:languageTint="@{repo.language}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_title"
+                    tools:text="Java" />
+
+                <TextView
+                    android:id="@+id/item_stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_margin"
+                    android:gravity="center_vertical"
+                    android:text="@{Integer.toString(repo.stargazersCount)}"
+                    android:textColor="@color/item_color_stars"
+                    app:layout_constraintEnd_toStartOf="@+id/line1"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item_language"
+                    tools:text="3456" />
+
+                <TextView
+                    android:id="@+id/item_stars_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/title_stars"
+                    android:textColor="@color/item_color_star_text"
+                    app:layout_constraintEnd_toStartOf="@+id/line1"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item_stars" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="2dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="@color/item_color_line"
+                    app:layout_constraintEnd_toStartOf="@id/item_watchers"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/item_stars"
+                    app:layout_constraintTop_toBottomOf="@id/item_language" />
+
+                <TextView
+                    android:id="@+id/item_watchers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_margin"
+                    android:gravity="center_vertical"
+                    android:text="@{Integer.toString(repo.watchersCount)}"
+                    android:textColor="@color/item_color_forks"
+                    app:layout_constraintEnd_toStartOf="@id/line2"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/line1"
+                    app:layout_constraintTop_toBottomOf="@id/item_language"
+                    tools:text="3456" />
+
+                <TextView
+                    android:id="@+id/item_watchers_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/title_watchers"
+                    android:textColor="@color/item_color_star_text"
+                    app:layout_constraintEnd_toStartOf="@id/line2"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/line1"
+                    app:layout_constraintTop_toBottomOf="@id/item_watchers" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="2dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="@color/item_color_line"
+                    app:layout_constraintEnd_toStartOf="@id/item_forks"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/item_watchers"
+                    app:layout_constraintTop_toBottomOf="@id/item_language" />
+
+                <TextView
+                    android:id="@+id/item_forks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_margin"
+                    android:gravity="center_vertical"
+                    android:text="@{Integer.toString(repo.forksCount)}"
+                    android:textColor="@color/item_color_forks"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/line2"
+                    app:layout_constraintTop_toBottomOf="@+id/item_language"
+                    tools:text="3456" />
+
+                <TextView
+                    android:id="@+id/item_forks_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/title_forks"
+                    android:textColor="@color/item_color_star_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/line2"
+                    app:layout_constraintTop_toBottomOf="@id/item_forks" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+</layout>
