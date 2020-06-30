@@ -1,11 +1,9 @@
-# GGSearchApp
-Google Custom Search Implementation (MVVM+DataBinding+RxKotlin+Room)
+# Square Inc.(c) Github Repos Listing
+MVVM + DataBinding + RxKotlin
 
-Data retrieval is divided in 2 threads, 15 results from each, taking into consideration the limitations of GCustom Search:
-- max 10 results per page
-- not 0(zero)-based pages, but 1-based
-- obligatory 'cx'(GCustom Search Engine key) parameter
-
-+ On screen start last successfully performed request data is acquired.
-+ The cancellation of search is achievable when in progress.
-+ For test purposes the tablet layout, similar to the smartphone one, was added.
+- 1st 'M' from MVVM consists of UseCase, Repositorie, and Data Source(Github API in this case)
+- Hilt for DI applied
+- Unit Tests introduced
+- listing retrieving with pagination
+- MotionLayout in use
+- NavComponent basic features are used for navigating between fragments, with use of shared elements for smooth transition
