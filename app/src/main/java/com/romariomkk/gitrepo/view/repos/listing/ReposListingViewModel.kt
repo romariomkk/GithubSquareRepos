@@ -48,7 +48,7 @@ class ReposListingViewModel @ViewModelInject constructor(
                 else
                     squareRepoSource.addAll(it, it.size == params.size)
 
-                incPagingArg()
+                switchNextPage()
             }, {
                 Timber.e("$it")
                 if (params.pageNum == PageParams.START_PAGE)
@@ -59,7 +59,7 @@ class ReposListingViewModel @ViewModelInject constructor(
             .addTo(disposables)
     }
 
-    private fun incPagingArg() {
+    private fun switchNextPage() {
         params = params.nextPage()
     }
 

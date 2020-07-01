@@ -84,8 +84,7 @@ abstract class AbsRVAdapter<T, out DB : ViewDataBinding, VH : AbsRVViewHolder<T,
 
         })
 
-        removeLoadingItem()
-        removeErrorItem()
+        removeAuxiliaryItems()
 
         items.clear()
         items.addAll(newItems)
@@ -171,6 +170,11 @@ abstract class AbsRVAdapter<T, out DB : ViewDataBinding, VH : AbsRVViewHolder<T,
             isLoadingErrorAdded = false
             removeAt(items.size - 1)
         }
+    }
+
+    fun removeAuxiliaryItems() {
+        removeLoadingItem()
+        removeErrorItem()
     }
 
     class LoadingItem<T>(view: View) : AbsRVViewHolder<T, ItemLoadingBinding>(view) {
