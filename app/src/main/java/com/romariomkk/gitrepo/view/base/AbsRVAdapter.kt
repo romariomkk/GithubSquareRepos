@@ -7,22 +7,29 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.romariomkk.gitrepo.R
+import com.romariomkk.gitrepo.databinding.ItemLoadingBinding
+import com.romariomkk.gitrepo.databinding.ItemLoadingErrorBinding
 import com.romariomkk.gitrepo.util.DiffCallback
 import java.util.*
 
 
-abstract class AbsRVAdapter<T, DB : ViewDataBinding, VH : AbsRVViewHolder<T, DB>>(
-    private val itemClickListener: OnItemClickListener<T>? = null
-) : RecyclerView.Adapter<VH>() {
+abstract class AbsRVAdapter<T, out DB : ViewDataBinding, VH : AbsRVViewHolder<T, DB>>: RecyclerView.Adapter<VH>() {
 
     internal lateinit var context: Context
     private val items = ArrayList<T>()
+
+    private var isLoadingAdded = false
+    private var isLoadingErrorAdded = false
 
     abstract fun provideLayoutId(viewType: Int): Int
     abstract fun getViewHolder(view: View, viewType: Int): VH
 
     abstract fun areItemsTheSame(oldItem: T, newItem: T): Boolean
     abstract fun areContentTheSame(oldItem: T, newItem: T): Boolean
+
+    abstract fun getLoadingItem(): T
+    abstract fun getLoadingErrorItem(): T
 
     private fun getView(parent: ViewGroup, viewType: Int): View {
         val view: View
@@ -37,15 +44,7 @@ abstract class AbsRVAdapter<T, DB : ViewDataBinding, VH : AbsRVViewHolder<T, DB>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         context = parent.context
-
-        val viewHolder = getViewHolder(getView(parent, viewType), viewType)
-        itemClickListener?.let {
-            viewHolder.setOnClickListener { pos ->
-                val item = getItemAt(pos)!!
-                itemClickListener.onItemClicked(item, *viewHolder.getTransitionViewNamePairs(item))
-            }
-        }
-        return viewHolder
+        return getViewHolder(getView(parent, viewType), viewType)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) =
@@ -53,6 +52,18 @@ abstract class AbsRVAdapter<T, DB : ViewDataBinding, VH : AbsRVViewHolder<T, DB>
 
     override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
         holder.bind(getItemAt(position)!!, payloads)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == items.lastIndex) {
+            when {
+                isLoadingAdded -> R.layout.item_loading
+                isLoadingErrorAdded -> R.layout.item_loading_error
+                else -> R.layout.item_result
+            }
+        } else {
+            R.layout.item_result
+        }
     }
 
 
@@ -72,6 +83,9 @@ abstract class AbsRVAdapter<T, DB : ViewDataBinding, VH : AbsRVViewHolder<T, DB>
                 this@AbsRVAdapter.areContentTheSame(oldItem, newItem)
 
         })
+
+        removeLoadingItem()
+        removeErrorItem()
 
         items.clear()
         items.addAll(newItems)
@@ -129,4 +143,41 @@ abstract class AbsRVAdapter<T, DB : ViewDataBinding, VH : AbsRVViewHolder<T, DB>
     }
 
     fun isEmpty() = items.isEmpty()
+
+
+    fun addLoadingItem() {
+        removeErrorItem()
+
+        isLoadingAdded = true
+        add(getLoadingItem())
+    }
+
+    fun removeLoadingItem() {
+        if (isLoadingAdded) {
+            isLoadingAdded = false
+            removeAt(items.size - 1)
+        }
+    }
+
+    fun addErrorItem() {
+        removeLoadingItem()
+
+        isLoadingErrorAdded = true
+        add(getLoadingErrorItem())
+    }
+
+    fun removeErrorItem() {
+        if (isLoadingErrorAdded) {
+            isLoadingErrorAdded = false
+            removeAt(items.size - 1)
+        }
+    }
+
+    class LoadingItem<T>(view: View) : AbsRVViewHolder<T, ItemLoadingBinding>(view) {
+        override fun bind(item: T, payloads: MutableList<Any>?) {}
+    }
+
+    class LoadingErrorItem<T>(view: View): AbsRVViewHolder<T, ItemLoadingErrorBinding>(view) {
+        override fun bind(item: T, payloads: MutableList<Any>?) {}
+    }
 }

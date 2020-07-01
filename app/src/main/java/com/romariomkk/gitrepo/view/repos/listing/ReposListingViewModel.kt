@@ -15,40 +15,52 @@ class ReposListingViewModel @ViewModelInject constructor(
 ) : AbsViewModel() {
 
     val squareRepoSource = ResourceListLiveData<GithubRepo>()
-    private var params = PageParams()
+    private lateinit var params: PageParams
 
     override fun onAttached() {
         loadInitial()
     }
 
     fun loadInitial() {
-        squareReposUseCase.execute(params)
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { squareRepoSource.initialLoading() }
-            .subscribe({
-                squareRepoSource.set(it, it.size == params.size, true)
-            }, {
-                Timber.e("$it")
-                squareRepoSource.initialError(it)
-            })
-            .addTo(disposables)
+        params = PageParams()
+        loadCurrent()
     }
 
     fun loadNext() {
         if (!squareRepoSource.hasMore)
             return
 
-        params = params.nextPage()
+        loadCurrent()
+    }
 
+    fun loadCurrent() {
         squareReposUseCase.execute(params)
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { squareRepoSource.loading() }
+            .doOnSubscribe {
+                if (params.pageNum == PageParams.START_PAGE)
+                    squareRepoSource.initialLoading()
+                else
+                    squareRepoSource.loading()
+            }
             .subscribe({
-                squareRepoSource.addAll(it, it.size == params.size)
+                if (params.pageNum == PageParams.START_PAGE)
+                    squareRepoSource.set(it, it.size == params.size, true)
+                else
+                    squareRepoSource.addAll(it, it.size == params.size)
+
+                incPagingArg()
             }, {
-                squareRepoSource.error(it)
+                Timber.e("$it")
+                if (params.pageNum == PageParams.START_PAGE)
+                    squareRepoSource.initialError(it)
+                else
+                    squareRepoSource.error(it)
             })
             .addTo(disposables)
+    }
+
+    private fun incPagingArg() {
+        params = params.nextPage()
     }
 
 }

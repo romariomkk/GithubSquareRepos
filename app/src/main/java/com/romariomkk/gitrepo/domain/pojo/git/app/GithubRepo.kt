@@ -22,4 +22,15 @@ data class GithubRepo(
     val watchersCount: Int,
     val ownerLogin: String,
     val ownerAvatarUrl: String
-): Parcelable
+): Parcelable {
+
+    companion object {
+        fun empty(): GithubRepo {
+            return GithubRepo("", "", 0,
+                "", "", -1, "", "",
+                0, false, 0,
+                0, "", "",
+                0, "", "")
+        }
+    }
+}

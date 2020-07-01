@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 
-abstract class AbsRVViewHolder<T, DB: ViewDataBinding>(
+abstract class AbsRVViewHolder<T, out DB: ViewDataBinding>(
     override val containerView: View
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
@@ -34,4 +34,8 @@ abstract class AbsRVViewHolder<T, DB: ViewDataBinding>(
 
 interface OnItemClickListener<T> {
     fun onItemClicked(item: T, vararg views: Pair<View, String>)
+}
+
+interface OnErrorItemClickListener {
+    fun onItemClicked()
 }

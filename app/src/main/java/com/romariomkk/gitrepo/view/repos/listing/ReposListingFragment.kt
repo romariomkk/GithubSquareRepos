@@ -12,11 +12,13 @@ import com.romariomkk.gitrepo.databinding.FragmentReposListingBinding
 import com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo
 import com.romariomkk.gitrepo.util.*
 import com.romariomkk.gitrepo.view.base.AbsFragment
+import com.romariomkk.gitrepo.view.base.OnErrorItemClickListener
 import com.romariomkk.gitrepo.view.base.OnItemClickListener
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.components.FragmentComponent
 import kotlinx.android.synthetic.main.fragment_repos_listing.*
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ReposListingFragment : AbsFragment<FragmentReposListingBinding, ReposListingViewModel>() {
@@ -28,7 +30,7 @@ class ReposListingFragment : AbsFragment<FragmentReposListingBinding, ReposListi
         ReposListingViewModel::class.java
 
     private val mReposAdapter by lazy {
-        ReposAdapter(mItemClickListener)
+        ReposAdapter(mItemClickListener, mErrorClickListener)
     }
     private val reposScrollListener by lazy {
         RVLoadMoreScrollListener { viewModel.loadNext() }
@@ -41,6 +43,12 @@ class ReposListingFragment : AbsFragment<FragmentReposListingBinding, ReposListi
             } else {
                 navController.navigate(ReposListingFragmentDirections.toRepoDetail(item))
             }
+        }
+    }
+
+    private val mErrorClickListener = object : OnErrorItemClickListener {
+        override fun onItemClicked() {
+            viewModel.loadCurrent()
         }
     }
 
@@ -57,28 +65,33 @@ class ReposListingFragment : AbsFragment<FragmentReposListingBinding, ReposListi
     }
 
     private val mRepoObserver = Observer<Resource<List<GithubRepo>>> {
-        if (it.status.isAnySuccess()) {
+        Timber.e("Repos status: ${it.status}")
+        if (it.status.isAnySuccess() || it.status.isAnyError()) {
             reposScrollListener.isLoading = false
-            mReposAdapter.updateItems(it.data!!)
-        } else if (it.status.isAnyError()) {
-            reposScrollListener.isLoading = false
-
+        }
+        if (it.status.isAnyError()) {
             val message = it.exception?.message
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
 
         when (it.status) {
             is Resource.Status.InitialError -> {
-
+                mReposAdapter.addErrorItem()
             }
             is Resource.Status.Error -> {
-
+                mReposAdapter.addErrorItem()
+            }
+            is Resource.Status.InitialSuccessHasMore -> {
+                mReposAdapter.updateItems(it.data!!)
             }
             is Resource.Status.SuccessHasMore -> {
-
+                mReposAdapter.updateItems(it.data!!)
+            }
+            is Resource.Status.InitialLoading -> {
+                mReposAdapter.addLoadingItem()
             }
             is Resource.Status.Loading -> {
-
+                mReposAdapter.addLoadingItem()
             }
         }
     }
