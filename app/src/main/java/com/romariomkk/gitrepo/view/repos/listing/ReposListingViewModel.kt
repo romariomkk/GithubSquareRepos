@@ -21,7 +21,7 @@ class ReposListingViewModel @ViewModelInject constructor(
         loadInitial()
     }
 
-    private fun loadInitial() {
+    fun loadInitial() {
         squareReposUseCase.execute(params)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

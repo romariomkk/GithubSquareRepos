@@ -1,7 +1,7 @@
 # Square Inc.(c) Github Repos Listing
 MVVM + DataBinding + RxKotlin
 
-- 1st 'M' from MVVM consists of UseCase, Repositorie, and Data Source(Github API in this case)
+- 1st 'M' from MVVM consists of UseCase, Gateway(was named as such to avoid ambiguity of naming the entity as 'Repository'), and Data Source(Github API in this case)
 - Hilt for DI applied
 - Unit Tests introduced
 - listing retrieving with pagination

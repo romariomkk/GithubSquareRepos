@@ -75,8 +75,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
     //tests
     testImplementation "junit:junit:$junit"
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoInline"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navVer"
     implementation "androidx.navigation:navigation-ui-ktx:$navVer"
