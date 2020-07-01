@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.romariomkk.gitrepo.R
 import com.romariomkk.gitrepo.databinding.FragmentReposListingBinding
 import com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo
-import com.romariomkk.gitrepo.util.RVLoadMoreScrollListener
-import com.romariomkk.gitrepo.util.Resource
-import com.romariomkk.gitrepo.util.applyTransitionConfigs
-import com.romariomkk.gitrepo.util.isAnySuccess
+import com.romariomkk.gitrepo.util.*
 import com.romariomkk.gitrepo.view.base.AbsFragment
 import com.romariomkk.gitrepo.view.base.OnItemClickListener
 import dagger.hilt.InstallIn
@@ -62,11 +60,25 @@ class ReposListingFragment : AbsFragment<FragmentReposListingBinding, ReposListi
         if (it.status.isAnySuccess()) {
             reposScrollListener.isLoading = false
             mReposAdapter.updateItems(it.data!!)
+        } else if (it.status.isAnyError()) {
+            reposScrollListener.isLoading = false
+
+            val message = it.exception?.message
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
+
         when (it.status) {
-            Resource.Status.Error -> {
-                val message = it.exception?.message
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            is Resource.Status.InitialError -> {
+
+            }
+            is Resource.Status.Error -> {
+
+            }
+            is Resource.Status.SuccessHasMore -> {
+
+            }
+            is Resource.Status.Loading -> {
+
             }
         }
     }

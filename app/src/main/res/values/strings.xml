@@ -8,4 +8,5 @@
     <string name="transition_image" translatable="false">image %s</string>
     <string name="transition_card" translatable="false">card %s</string>
     <string name="transition_lang" translatable="false">lang %s</string>
+    <string name="title_no_internet">No Internet.\nPress to Try again</string>
 </resources>
