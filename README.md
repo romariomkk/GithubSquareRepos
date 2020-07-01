@@ -7,3 +7,5 @@ MVVM + DataBinding + RxKotlin
 - listing retrieving with pagination
 - MotionLayout in use
 - NavComponent basic features are used for navigating between fragments, with use of shared elements for smooth transition
+
+![Here should be the screen-record](screen_record.gif)

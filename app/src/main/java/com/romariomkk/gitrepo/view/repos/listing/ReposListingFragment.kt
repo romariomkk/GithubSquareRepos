@@ -69,9 +69,6 @@ class ReposListingFragment : AbsFragment<FragmentReposListingBinding, ReposListi
 
         when (it.status) {
             is Resource.Status.InitialError, is Resource.Status.Error -> {
-                val message = it.exception?.message
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-
                 mReposAdapter.addErrorItem()
             }
             is Resource.Status.InitialSuccessHasMore, is Resource.Status.SuccessHasMore -> {
