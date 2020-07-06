@@ -1,6 +1,6 @@
-package com.romariomkk.gitrepo.domain.repo.contract
+package com.romariomkk.gitrepo.data.repo.contract
 
-import com.romariomkk.gitrepo.domain.pojo.git.server.ServerGithubRepo
+import com.romariomkk.gitrepo.data.pojo.ServerGithubRepo
 import io.reactivex.Single
 
 interface IGithubGateway {

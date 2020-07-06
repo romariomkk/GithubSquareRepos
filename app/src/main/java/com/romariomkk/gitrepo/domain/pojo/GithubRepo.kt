@@ -1,4 +1,4 @@
-package com.romariomkk.gitrepo.domain.pojo.git.app
+package com.romariomkk.gitrepo.domain.pojo
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -26,11 +26,13 @@ data class GithubRepo(
 
     companion object {
         fun empty(): GithubRepo {
-            return GithubRepo("", "", 0,
+            return GithubRepo(
+                "", "", 0,
                 "", "", -1, "", "",
                 0, false, 0,
                 0, "", "",
-                0, "", "")
+                0, "", ""
+            )
         }
     }
 }

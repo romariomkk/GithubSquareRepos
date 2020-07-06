@@ -1,7 +1,7 @@
 package com.romariomkk.gitrepo.view.repos.listing
 
 import androidx.hilt.lifecycle.ViewModelInject
-import com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo
+import com.romariomkk.gitrepo.domain.pojo.GithubRepo
 import com.romariomkk.gitrepo.domain.usecase.contract.IGetSquareReposUseCase
 import com.romariomkk.gitrepo.util.PageParams
 import com.romariomkk.gitrepo.util.ResourceListLiveData

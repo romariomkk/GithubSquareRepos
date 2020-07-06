@@ -5,7 +5,7 @@ import androidx.core.view.ViewCompat
 import androidx.databinding.ViewDataBinding
 import com.romariomkk.gitrepo.R
 import com.romariomkk.gitrepo.databinding.ItemResultBinding
-import com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo
+import com.romariomkk.gitrepo.domain.pojo.GithubRepo
 import com.romariomkk.gitrepo.view.base.AbsRVAdapter
 import com.romariomkk.gitrepo.view.base.AbsRVViewHolder
 import com.romariomkk.gitrepo.view.base.OnErrorItemClickListener

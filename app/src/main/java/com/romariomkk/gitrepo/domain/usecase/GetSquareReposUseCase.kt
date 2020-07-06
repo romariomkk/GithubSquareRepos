@@ -1,6 +1,6 @@
 package com.romariomkk.gitrepo.domain.usecase
 
-import com.romariomkk.gitrepo.domain.repo.contract.IGithubGateway
+import com.romariomkk.gitrepo.data.repo.contract.IGithubGateway
 import com.romariomkk.gitrepo.domain.usecase.contract.IGetSquareReposUseCase
 import com.romariomkk.gitrepo.util.PageParams
 import com.romariomkk.gitrepo.util.toGithubRepo

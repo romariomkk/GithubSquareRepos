@@ -24,7 +24,7 @@
 
         <argument
             android:name="repo"
-            app:argType="com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo" />
+            app:argType="com.romariomkk.gitrepo.domain.pojo.GithubRepo" />
     </fragment>
 
 </navigation>

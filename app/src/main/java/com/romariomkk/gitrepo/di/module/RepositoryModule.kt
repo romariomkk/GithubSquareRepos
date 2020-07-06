@@ -1,7 +1,7 @@
 package com.romariomkk.gitrepo.di.module
 
-import com.romariomkk.gitrepo.domain.repo.GithubGateway
-import com.romariomkk.gitrepo.domain.repo.contract.IGithubGateway
+import com.romariomkk.gitrepo.data.repo.GithubGateway
+import com.romariomkk.gitrepo.data.repo.contract.IGithubGateway
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

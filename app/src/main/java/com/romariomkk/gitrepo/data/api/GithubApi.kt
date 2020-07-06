@@ -1,6 +1,6 @@
-package com.romariomkk.gitrepo.domain.api
+package com.romariomkk.gitrepo.data.api
 
-import com.romariomkk.gitrepo.domain.pojo.git.server.ServerGithubRepo
+import com.romariomkk.gitrepo.data.pojo.ServerGithubRepo
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

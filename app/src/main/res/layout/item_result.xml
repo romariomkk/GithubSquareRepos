@@ -6,7 +6,7 @@
 
         <variable
             name="repo"
-            type="com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo" />
+            type="com.romariomkk.gitrepo.domain.pojo.GithubRepo" />
 
         <import type="com.romariomkk.gitrepo.util.Utils" />
 

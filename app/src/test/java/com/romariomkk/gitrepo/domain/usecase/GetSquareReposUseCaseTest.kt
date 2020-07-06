@@ -2,9 +2,9 @@ package com.romariomkk.gitrepo.domain.usecase
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
-import com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo
-import com.romariomkk.gitrepo.domain.pojo.git.server.ServerGithubRepo
-import com.romariomkk.gitrepo.domain.repo.contract.IGithubGateway
+import com.romariomkk.gitrepo.domain.pojo.GithubRepo
+import com.romariomkk.gitrepo.data.pojo.ServerGithubRepo
+import com.romariomkk.gitrepo.data.repo.contract.IGithubGateway
 import com.romariomkk.gitrepo.domain.usecase.contract.IGetSquareReposUseCase
 import com.romariomkk.gitrepo.util.PageParams
 import io.reactivex.Single

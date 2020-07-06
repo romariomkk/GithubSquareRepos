@@ -1,17 +1,16 @@
-package com.romariomkk.gitrepo.domain.repo
+package com.romariomkk.gitrepo.data.repo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
-import com.romariomkk.gitrepo.domain.api.GithubApi
-import com.romariomkk.gitrepo.domain.pojo.git.server.ServerGithubRepo
-import com.romariomkk.gitrepo.domain.repo.contract.IGithubGateway
+import com.romariomkk.gitrepo.data.api.GithubApi
+import com.romariomkk.gitrepo.data.pojo.ServerGithubRepo
+import com.romariomkk.gitrepo.data.repo.contract.IGithubGateway
 import com.romariomkk.gitrepo.util.PageParams
 import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

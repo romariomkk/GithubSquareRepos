@@ -1,10 +1,9 @@
 package com.romariomkk.gitrepo.di.module
 
-import android.util.Log
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.romariomkk.gitrepo.BuildConfig
-import com.romariomkk.gitrepo.domain.api.GithubApi
+import com.romariomkk.gitrepo.data.api.GithubApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -46,12 +46,11 @@ open class NetworkModule {
     @Provides
     @Singleton
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger {
+        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
-                Log.d("OkHttp", message)
+                Timber.d(message)
             }
-        })
-            .apply { level = HttpLoggingInterceptor.Level.BODY }
+        }).apply { level = HttpLoggingInterceptor.Level.BODY }
 
 
     @Provides

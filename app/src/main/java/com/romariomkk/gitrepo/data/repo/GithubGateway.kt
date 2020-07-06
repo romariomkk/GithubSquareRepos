@@ -1,7 +1,7 @@
-package com.romariomkk.gitrepo.domain.repo
+package com.romariomkk.gitrepo.data.repo
 
-import com.romariomkk.gitrepo.domain.api.GithubApi
-import com.romariomkk.gitrepo.domain.repo.contract.IGithubGateway
+import com.romariomkk.gitrepo.data.api.GithubApi
+import com.romariomkk.gitrepo.data.repo.contract.IGithubGateway
 import javax.inject.Inject
 import javax.inject.Singleton
 

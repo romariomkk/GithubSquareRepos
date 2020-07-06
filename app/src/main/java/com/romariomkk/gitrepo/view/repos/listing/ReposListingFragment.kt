@@ -2,12 +2,11 @@ package com.romariomkk.gitrepo.view.repos.listing
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.romariomkk.gitrepo.R
 import com.romariomkk.gitrepo.databinding.FragmentReposListingBinding
-import com.romariomkk.gitrepo.domain.pojo.git.app.GithubRepo
+import com.romariomkk.gitrepo.domain.pojo.GithubRepo
 import com.romariomkk.gitrepo.util.*
 import com.romariomkk.gitrepo.view.base.AbsFragment
 import com.romariomkk.gitrepo.view.base.OnErrorItemClickListener

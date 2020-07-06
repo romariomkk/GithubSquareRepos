@@ -1,4 +1,4 @@
-package com.romariomkk.gitrepo.domain.pojo.git.server
+package com.romariomkk.gitrepo.data.pojo
 
 import com.google.gson.annotations.SerializedName
 
